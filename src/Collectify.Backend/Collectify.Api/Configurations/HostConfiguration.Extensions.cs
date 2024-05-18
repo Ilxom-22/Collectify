@@ -1,7 +1,9 @@
 using System.Text;
+using Collectify.Application.Identity.Brokers;
 using Collectify.Application.Identity.Models.Settings;
 using Collectify.Application.Identity.Services;
 using Collectify.Domain;
+using Collectify.Infrastructure.Identity.Brokers;
 using Collectify.Infrastructure.Identity.Services;
 using Collectify.Persistence.DataContexts;
 using Collectify.Persistence.Repositories;
@@ -94,7 +96,8 @@ public static partial class HostConfiguration
         // register helper services
         builder.Services
             .AddTransient<IAccessTokenGeneratorService, AccessTokenGeneratorService>()
-            .AddTransient<IPasswordHasherService, PasswordHasherService>();
+            .AddTransient<IPasswordHasherService, PasswordHasherService>()
+            .AddScoped<IRequestContextProvider, RequestContextProvider>();
         
         // register services
         builder.Services
