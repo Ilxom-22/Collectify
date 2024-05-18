@@ -9,6 +9,7 @@ using Collectify.Infrastructure.Identity.Brokers;
 using Collectify.Infrastructure.Identity.Services;
 using Collectify.Infrastructure.Identity.Validators;
 using Collectify.Persistence.DataContexts;
+using Collectify.Persistence.Extensions;
 using Collectify.Persistence.Repositories;
 using Collectify.Persistence.Repositories.Interfaces;
 using FluentValidation;
@@ -134,6 +135,14 @@ public static partial class HostConfiguration
         builder.Services.AddAutoMapper(assemblies);
 
         return builder;
+    }
+    
+    private static async ValueTask<WebApplication> MigrateDatabaseSchemaAsync(this WebApplication app)
+    {
+        var serviceScopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+        await serviceScopeFactory.MigrateAsync<AppDbContext>();
+        
+        return app;
     }
     
     private static WebApplication UseDevTools(this WebApplication app)
