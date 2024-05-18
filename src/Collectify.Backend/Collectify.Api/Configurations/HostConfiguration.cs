@@ -8,7 +8,8 @@ public static partial class HostConfiguration
             .AddCors()
             .AddDevTools()
             .AddExposers()
-            .AddPersistence();
+            .AddPersistence()
+            .AddJwtAuthentication();
         
         return builder;
     }

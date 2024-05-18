@@ -1,6 +1,10 @@
+using System.Text;
+using Collectify.Application.Identity.Models.Settings;
 using Collectify.Domain;
 using Collectify.Persistence.DataContexts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Collectify.Api.Configurations;
 
@@ -43,6 +47,36 @@ public static partial class HostConfiguration
         builder.Services.AddDbContext<AppDbContext>(options => 
             options.UseNpgsql(dbConnectionString));
         
+        return builder;
+    }
+    
+    private static WebApplicationBuilder AddJwtAuthentication(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddHttpContextAccessor();
+        
+        builder.Services.Configure<JwtSettings>(
+            builder.Configuration.GetSection(nameof(JwtSettings)));
+        
+        var jwtSettings = new JwtSettings();
+        builder.Configuration.GetSection(nameof(JwtSettings)).Bind(jwtSettings);
+
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateLifetime = jwtSettings.ValidateLifetime,
+                    ValidateIssuerSigningKey = jwtSettings.ValidateIssuerSigningKey,
+                    ValidIssuer = jwtSettings.ValidIssuer,
+                    ValidAudience = jwtSettings.ValidAudience,
+                    ValidateIssuer = jwtSettings.ValidateIssuer,
+                    ValidateAudience = jwtSettings.ValidateAudience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey))
+                };
+            });
+
         return builder;
     }
     
