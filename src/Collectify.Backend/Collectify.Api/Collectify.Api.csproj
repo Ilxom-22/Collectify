@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Collectify.Infrastructure\Collectify.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.1" />
+    </ItemGroup>
+
 </Project>

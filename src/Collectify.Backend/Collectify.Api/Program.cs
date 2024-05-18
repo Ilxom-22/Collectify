@@ -1,6 +1,9 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using Collectify.Api.Configurations;
 
-app.MapGet("/", () => "Hello World!");
+var builder = WebApplication.CreateBuilder(args);
+builder.Configure();
+
+var app = builder.Build();
+app.Configure();
 
 app.Run();
