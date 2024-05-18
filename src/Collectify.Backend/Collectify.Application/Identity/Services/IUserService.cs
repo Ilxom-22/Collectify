@@ -14,9 +14,15 @@ public interface IUserService
         bool asNoTracking = false,
         CancellationToken cancellationToken = default);
     
-    ValueTask<User?> GetByEmail(string emailAddress);
+    ValueTask<User?> GetByUserName(string userName);
 
-    ValueTask<bool> UserExists(string emailAddress, CancellationToken cancellationToken = default);
+    ValueTask<bool> UserExists(
+        string emailAddress,
+        CancellationToken cancellationToken = default);
+
+    ValueTask<bool> IsUserNameTaken(
+        string userName,
+        CancellationToken cancellationToken = default);
 
     ValueTask<User> CreateAsync(
         User user,

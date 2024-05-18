@@ -18,6 +18,10 @@ public interface IUserRepository
         string emailAddress,
         CancellationToken cancellationToken = default);
 
+    ValueTask<bool> IsUserNameTaken(
+        string userName,
+        CancellationToken cancellationToken = default);
+
     ValueTask<User> CreateAsync(
         User user, 
         bool saveChanges = true,

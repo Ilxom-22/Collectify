@@ -28,6 +28,15 @@ public class UserRepository(AppDbContext appDbContext) :
             .AnyAsync(user => user.EmailAddress == emailAddress, cancellationToken);
     }
     
+    public async ValueTask<bool> IsUserNameTaken(
+        string userName,
+        CancellationToken cancellationToken = default)
+    {
+        return await base
+            .Get(asNoTracking: true)
+            .AnyAsync(user => user.UserName == userName, cancellationToken);
+    }
+    
     public async ValueTask<User?> GetByIdAsync(
         Guid userId,
         bool asNoTracking = false, 
