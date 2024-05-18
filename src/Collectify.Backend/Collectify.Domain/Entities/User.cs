@@ -16,4 +16,6 @@ public class User : IEntity
     public Role Role { get; set; } = Role.User;
 
     public AccountStatus Status { get; set; } = AccountStatus.Active;
+    
+    public AccessToken? AccessToken { get; set; }
 }
