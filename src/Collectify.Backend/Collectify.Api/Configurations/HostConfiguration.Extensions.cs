@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text;
+using Collectify.Api.Filters;
 using Collectify.Application.Identity.Brokers;
 using Collectify.Application.Identity.Models.Dtos;
 using Collectify.Application.Identity.Models.Settings;
@@ -32,7 +33,11 @@ public static partial class HostConfiguration
     private static WebApplicationBuilder AddExposers(this WebApplicationBuilder builder)
     {
         builder.Services.AddRouting(options => options.LowercaseUrls = true);
-        builder.Services.AddControllers();
+        builder.Services.AddControllers(configs =>
+        {
+            configs.Filters.Add<ExceptionFilter>();
+            configs.Filters.Add<AccessTokenValidationFilter>();
+        });
 
         return builder;
     }

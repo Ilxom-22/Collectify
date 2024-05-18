@@ -17,12 +17,14 @@ public static partial class HostConfiguration
         return builder;
     }
 
-    public static WebApplication Configure(this WebApplication app)
+    public static async ValueTask<WebApplication> ConfigureAsync(this WebApplication app)
     {
         app
             .UseCors()
             .UseDevTools()
             .UseExposers();
+
+        await app.MigrateDatabaseSchemaAsync();
         
         return app;
     }
