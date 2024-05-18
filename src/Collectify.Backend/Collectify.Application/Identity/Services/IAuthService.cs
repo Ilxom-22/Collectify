@@ -17,6 +17,5 @@ public interface IAuthService
         CancellationToken cancellationToken = default);
 
     public ValueTask LogOutAsync(
-        AccessToken accessToken,
         CancellationToken cancellationToken = default);
 }

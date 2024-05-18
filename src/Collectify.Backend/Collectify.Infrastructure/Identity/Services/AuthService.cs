@@ -56,10 +56,12 @@ public class AuthService(
     }
 
     public async ValueTask LogOutAsync(
-        AccessToken accessToken,
         CancellationToken cancellationToken = default)
     {
-        await accessTokenService.DeleteByUserIdAsync(accessToken.UserId, cancellationToken: cancellationToken);
+        var userId = contextProvider.GetUserId()
+                     ?? throw new AuthenticationException("The current logged-in user could not be found!");
+        
+        await accessTokenService.DeleteByUserIdAsync(userId, cancellationToken: cancellationToken);
     }
 
     private async ValueTask ValidateSignUpDetailsAsync(
