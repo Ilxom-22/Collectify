@@ -4,11 +4,10 @@ using Collectify.Domain.Entities;
 
 namespace Collectify.Infrastructure.Identity.Mappers;
 
-public class UserMapper : Profile
+public class AccessTokenMapper : Profile
 {
-    public UserMapper()
+    public AccessTokenMapper()
     {
-        CreateMap<SignUpDetails, User>();
-        CreateMap<User, UserDto>();
+        CreateMap<AccessToken, AccessTokenDto>();
     }
 }
