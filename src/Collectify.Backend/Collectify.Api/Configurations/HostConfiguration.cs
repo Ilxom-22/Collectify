@@ -10,7 +10,9 @@ public static partial class HostConfiguration
             .AddExposers()
             .AddPersistence()
             .AddJwtAuthentication()
-            .AddIdentityInfrastructure();
+            .AddIdentityInfrastructure()
+            .AddValidators()
+            .AddMappers();
         
         return builder;
     }

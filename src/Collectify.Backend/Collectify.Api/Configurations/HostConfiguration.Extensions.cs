@@ -1,13 +1,17 @@
+using System.Reflection;
 using System.Text;
 using Collectify.Application.Identity.Brokers;
+using Collectify.Application.Identity.Models.Dtos;
 using Collectify.Application.Identity.Models.Settings;
 using Collectify.Application.Identity.Services;
 using Collectify.Domain;
 using Collectify.Infrastructure.Identity.Brokers;
 using Collectify.Infrastructure.Identity.Services;
+using Collectify.Infrastructure.Identity.Validators;
 using Collectify.Persistence.DataContexts;
 using Collectify.Persistence.Repositories;
 using Collectify.Persistence.Repositories.Interfaces;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -102,8 +106,33 @@ public static partial class HostConfiguration
         // register services
         builder.Services
             .AddScoped<IUserService, UserService>()
-            .AddScoped<IAccessTokenService, AccessTokenService>();
+            .AddScoped<IAccessTokenService, AccessTokenService>()
+            .AddScoped<IAuthService, AuthService>();
         
+        return builder;
+    }
+
+    private static WebApplicationBuilder AddValidators(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddScoped<IValidator<SignUpDetails>, SignUpDetailsValidator>();
+        
+        return builder;
+    }
+
+    private static WebApplicationBuilder AddMappers(this WebApplicationBuilder builder)
+    {
+        // retrieve all assemblies
+        var assemblies = Assembly
+            .GetExecutingAssembly()
+            .GetReferencedAssemblies()
+            .Select(Assembly.Load)
+            .ToList();
+        
+        assemblies.Add(Assembly.GetExecutingAssembly());
+        
+        // register mappers by assemblies
+        builder.Services.AddAutoMapper(assemblies);
+
         return builder;
     }
     
