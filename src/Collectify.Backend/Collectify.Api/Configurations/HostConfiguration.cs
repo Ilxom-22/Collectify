@@ -9,7 +9,8 @@ public static partial class HostConfiguration
             .AddDevTools()
             .AddExposers()
             .AddPersistence()
-            .AddJwtAuthentication();
+            .AddJwtAuthentication()
+            .AddIdentityInfrastructure();
         
         return builder;
     }

@@ -1,7 +1,11 @@
 using System.Text;
 using Collectify.Application.Identity.Models.Settings;
+using Collectify.Application.Identity.Services;
 using Collectify.Domain;
+using Collectify.Infrastructure.Identity.Services;
 using Collectify.Persistence.DataContexts;
+using Collectify.Persistence.Repositories;
+using Collectify.Persistence.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -77,6 +81,22 @@ public static partial class HostConfiguration
                 };
             });
 
+        return builder;
+    }
+    
+    private static WebApplicationBuilder AddIdentityInfrastructure(this WebApplicationBuilder builder)
+    {
+        // register repositories
+        builder.Services
+            .AddScoped<IUserRepository, UserRepository>()
+            .AddScoped<IAccessTokenRepository, AccessTokenRepository>();
+        
+        // register helper services
+        builder.Services.AddTransient<IAccessTokenGeneratorService, AccessTokenGeneratorService>();
+        
+        // register services
+        builder.Services.AddScoped<IUserService, UserService>();
+        
         return builder;
     }
     
