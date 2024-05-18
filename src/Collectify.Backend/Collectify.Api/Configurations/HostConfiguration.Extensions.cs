@@ -95,7 +95,9 @@ public static partial class HostConfiguration
         builder.Services.AddTransient<IAccessTokenGeneratorService, AccessTokenGeneratorService>();
         
         // register services
-        builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services
+            .AddScoped<IUserService, UserService>()
+            .AddScoped<IAccessTokenService, AccessTokenService>();
         
         return builder;
     }
