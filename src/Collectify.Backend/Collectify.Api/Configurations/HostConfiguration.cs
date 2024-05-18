@@ -7,7 +7,8 @@ public static partial class HostConfiguration
         builder
             .AddCors()
             .AddDevTools()
-            .AddExposers();
+            .AddExposers()
+            .AddPersistence();
         
         return builder;
     }

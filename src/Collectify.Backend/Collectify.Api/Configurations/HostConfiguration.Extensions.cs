@@ -1,3 +1,7 @@
+using Collectify.Domain;
+using Collectify.Persistence.DataContexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace Collectify.Api.Configurations;
 
 public static partial class HostConfiguration
@@ -27,6 +31,18 @@ public static partial class HostConfiguration
                 .AllowAnyMethod()
                 .AllowCredentials()));
 
+        return builder;
+    }
+
+    private static WebApplicationBuilder AddPersistence(this WebApplicationBuilder builder)
+    {
+        var dbConnectionString = builder.Environment.IsDevelopment()
+            ? builder.Configuration.GetConnectionString(ConnectionStringConstants.LocalDbConnectionString)
+            : Environment.GetEnvironmentVariable(ConnectionStringConstants.RemoteDbConnectionString);
+        
+        builder.Services.AddDbContext<AppDbContext>(options => 
+            options.UseNpgsql(dbConnectionString));
+        
         return builder;
     }
     
