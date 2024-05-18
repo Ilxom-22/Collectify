@@ -92,7 +92,9 @@ public static partial class HostConfiguration
             .AddScoped<IAccessTokenRepository, AccessTokenRepository>();
         
         // register helper services
-        builder.Services.AddTransient<IAccessTokenGeneratorService, AccessTokenGeneratorService>();
+        builder.Services
+            .AddTransient<IAccessTokenGeneratorService, AccessTokenGeneratorService>()
+            .AddTransient<IPasswordHasherService, PasswordHasherService>();
         
         // register services
         builder.Services
