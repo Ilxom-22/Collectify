@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .theme-input-bg {
+        @apply bg-primaryColor dark:bg-primaryColorDark;
+    }
+
+    .theme-input-placeholder {
+        @apply placeholder-transparent focus:placeholder-tertiaryColor dark:focus:placeholder-tertiaryColorDark;
+    }
+
+    .theme-input-label {
+        @apply text-secondaryContentColor dark:text-tertiaryContentColorDark;
+    }
+
+    .theme-input-border-focus {
+        @apply border border-accentPrimaryColor dark:border-accentPrimaryColorDark;
+    }
+
+    .theme-input-border {
+        @apply border border-accentSecondaryColor dark:border-accentSecondaryColorDark;
+    }
+
+    .theme-input {
+        @apply bg-transparent outline-none appearance-none;
+      }
+}
+
+
