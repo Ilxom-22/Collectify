@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .theme-action-shadow {
+        @apply drop-shadow-sm;
+    }
+
+    .theme-action-transition {
+        @apply transition-all duration-300;
+    }
+
+    .theme-action-border-round {
+        @apply rounded-xl;
+    }
+
+    .theme-bg {
+        @apply bg-primaryColor dark:bg-primaryColorDark;
+    }
+}
