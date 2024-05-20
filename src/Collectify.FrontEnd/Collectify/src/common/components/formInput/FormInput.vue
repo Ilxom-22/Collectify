@@ -9,7 +9,7 @@
                       theme-input-placeholder theme-action-transition text-base"
                :placeholder="placeholder"
                :value="modelValue"
-               @input="$emit('update:modelValue', $event.target!)" />
+               @input="onInput" />
 
         <label for="input" :class="'text-md top-4 -translate-y-4 peer-focus:-translate-y-4'" class="absolute z-10 transform scale-75 origin-[0] start-2.5
                     peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto
@@ -37,6 +37,13 @@ const props = defineProps({
         default: ''
     }
 });
+
+const emit = defineEmits(['update:modelValue']);
+
+const onInput = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  emit('update:modelValue', target.value);
+};
 
 const isFocused = ref<boolean>(false);
 
