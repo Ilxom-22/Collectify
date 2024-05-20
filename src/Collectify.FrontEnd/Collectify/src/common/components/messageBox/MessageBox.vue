@@ -4,31 +4,43 @@
         <h1 class="text-white theme-action-transition">{{ displayedMessage }}</h1>
       </div>
     </Teleport>
-  </template>
+</template>
   
-  <script setup lang="ts">
-  import { MessageType } from './MessageType';
-  import { computed, ref } from 'vue';
+<script setup lang="ts">
+
+import { MessageType } from './MessageType';
+import { computed, ref, watch } from 'vue';
   
-  const isVisible = ref(false);
-  const displayedMessage = ref('');
-  const messageType = ref(MessageType.Success); // Default message type
+const isVisible = ref(false);
+const displayedMessage = ref('');
+const messageType = ref(MessageType.Success);
+let timeoutId: number | null;
   
-const showMessage = (message: string, type: MessageType) => {
+const showMessage = (message: string, type: MessageType = MessageType.Error) => {
+    if (message === null || message === '' || message === undefined) {
+        return;
+    }
+
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    }
+    
     displayedMessage.value = message;
     messageType.value = type;
     isVisible.value = true;
-  
-    setTimeout(() => {
-      hideMessage();
+
+    timeoutId = setTimeout(() => {
+        hideMessage();
+        timeoutId = null;
     }, 3000);
-  };
+};
   
-  const hideMessage = () => {
+const hideMessage = () => {
     isVisible.value = false;
-  };
-  
-  const messageStyle = computed(() => {
+};
+
+const messageStyle = computed(() => {
     switch (messageType.value) {
       case MessageType.Success:
         return 'theme-action-success';
@@ -37,10 +49,10 @@ const showMessage = (message: string, type: MessageType) => {
       default:
         return '';
     }
-  });
+});
 
 defineExpose({
   showMessage
 });
-  </script>
-  
+
+</script>
