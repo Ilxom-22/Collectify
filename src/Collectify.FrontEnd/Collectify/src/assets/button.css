@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .theme-action-overlay {
+        @apply relative overflow-hidden after:absolute after:top-0 after:left-0 after:h-full after:w-full
+        after:bg-opacity-0
+        focus:after:bg-opacity-20 focus:after:bg-black
+        active:after:bg-opacity-40 active:after:bg-black
+        hover:after:bg-opacity-10 hover:after:bg-white
+    }
+
+    .theme-action-padding {
+        @apply px-4;
+    }
+
+    .theme-action-disabled {
+        @apply bg-accentSecondaryColorDark;
+    }
+
+    .theme-action-primary {
+        @apply bg-accentPrimaryColor dark:bg-accentPrimaryColorDark;
+    }
+
+    .theme-action-secondary {
+        @apply bg-accentSecondaryColor dark:bg-accentSecondaryColorDark;
+    }
+
+    .theme-action-danger {
+        @apply bg-dangerColor;
+    }
+
+    .theme-action-success {
+        @apply bg-successColor;
+    }
+
+    .action-layout {
+        @apply h-[60px];
+    }
+
+    .action-small-layout {
+        @apply h-[45px];
+    }
+
+    .action-extra-small-layout {
+        @apply h-[35px];
+    }
+
+    .action-circle-layout {
+        @apply h-[40px] w-[40px] rounded-full;
+    }
+}
