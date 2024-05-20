@@ -33,8 +33,8 @@
 
 import {onBeforeMount, onBeforeUnmount, ref, watch} from "vue";
 import CloseButton from "../appButton/CloseButton.vue";
-import { DocumentService } from "@/infrastructure/services/DocumentService";
-import { TimerService } from "@/infrastructure/services/TimerService";
+import { DocumentService } from "@/infrastructure/services/document/DocumentService";
+import { TimerService } from "@/infrastructure/services/timer/TimerService";
 
 const timerService = new TimerService();
 const documentService = new DocumentService();
