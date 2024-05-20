@@ -8,7 +8,7 @@
             </div>
 
             <div class="w-full">
-                <search-form class="w-full"/>
+                <search-form :modelValue="searchValue" :placeholder="'Search'" class="w-full"/>
             </div>
 
             <div class="flex space-x-4 item-center ">
@@ -35,7 +35,7 @@ import { ButtonType } from '../components/appButton/ButtonType';
 import { ActionComponentSize } from '../constants/ActionComponentSize';
 import SearchForm from '../components/searchForm/SearchForm.vue';
 import { ref } from 'vue';
-import AuthModal from '@/modules/accounts/AuthModal.vue';
+import AuthModal from '@/modules/accounts/components/AuthModal.vue';
 
 const searchValue = ref<string>('');
 
