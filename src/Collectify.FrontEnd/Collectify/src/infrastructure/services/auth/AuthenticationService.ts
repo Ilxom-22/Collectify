@@ -13,7 +13,6 @@ export class AuthenticationService {
     constructor() {
         this.collectifyApiClient = new CollectifyApiClient();
         this.localStorageService = new LocalStorageService();
-        
     }
 
     public hasAccessToken() {

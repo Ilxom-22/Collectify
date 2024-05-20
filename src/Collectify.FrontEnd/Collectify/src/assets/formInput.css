@@ -25,7 +25,5 @@
 
     .theme-input {
         @apply bg-transparent outline-none appearance-none;
-      }
+    }
 }
-
-
