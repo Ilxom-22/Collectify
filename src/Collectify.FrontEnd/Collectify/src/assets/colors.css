@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .theme-bg-primary {
+        @apply bg-primaryColor dark:bg-primaryColorDark;
+    }
+
+    .theme-bg-secondary {
+        @apply bg-secondaryColor dark:bg-secondaryColorDark;
+    }
+
+    .theme-text-primary {
+        @apply text-primaryContentColor dark:text-primaryContentColorDark;
+    }
+
+    .theme-text-secondary {
+        @apply text-secondaryContentColor dark:text-secondaryContentColorDark;
+    }
+
+    .theme-border-primary {
+        @apply border-primaryBorderColor dark:border-secondaryColorDark;
+    }
+
+    .theme-divider {
+        @apply bg-secondaryContentColor dark:bg-secondaryContentColorDark;
+    }
+}
