@@ -1,13 +1,21 @@
 import './assets/main.css'
+import './assets/colors.css'
+import './assets/button.css'
+import './assets/formInput.css'
+import './assets/modal.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
+import { AppThemeService } from './infrastructure/services/AppThemeService'
 
+const appThemeService = new AppThemeService();
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(createPinia())
+app.use(createPinia());
 
-app.mount('#app')
+appThemeService.setAppTheme();
+
+app.mount('#app');

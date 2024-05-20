@@ -1,11 +1,14 @@
 <template>
   
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+  <main-header></main-header>
+
+  
+
 
 </template>
 
 <script setup lang="ts">
+import MainHeader from './common/views/MainHeader.vue';
+
 
 </script>
