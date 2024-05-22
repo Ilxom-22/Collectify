@@ -42,7 +42,7 @@ export class AuthenticationService {
     }
 
     public async setCurrentUser() {
-        if (this.isLoggedIn() || !this.hasAccessToken()) return;
+        if (!this.hasAccessToken()) return;
 
         const currentUser = await this.collectifyApiClient.auth.getCurrentUser();
         if (currentUser.isSuccess) {

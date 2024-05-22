@@ -38,9 +38,8 @@ public class AuthController(
         CancellationToken cancellationToken = default)
     {
         var accessToken = await authService.SignInAsync(details, cancellationToken);
-        var result = mapper.Map<AccessTokenDto>(accessToken);
 
-        return Ok(result);
+        return Ok(accessToken.Token);
     }
     
     [Authorize]
