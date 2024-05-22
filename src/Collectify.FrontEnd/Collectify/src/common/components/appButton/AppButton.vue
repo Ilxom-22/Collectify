@@ -1,6 +1,6 @@
 <template>
 
-    <button ref="component" type="button" :class="componentStyles" :disabled="disabled"
+    <button ref="component" type="button" :class="componentStyles" :disabled="props.disabled"
             class="overflow-hidden text-md theme-text-primary theme-action-shadow theme-action-border-round">
         <span class="inline-flex items-center w-full h-full theme-action-overlay theme-action-transition theme-action-border-round theme-action-padding"
               :class="contentStyles">
@@ -54,9 +54,10 @@ const componentStyles = computed(() => {
     let styles = ''
 
     // Add button type styles
-    if (props.disabled) {
+    if (props.disabled == true) {
         styles += ' theme-action-disabled cursor-not-allowed';
-    } else
+    } 
+    else {
         switch (props.type) {
             case ButtonType.Primary:
                 styles += ' theme-action-primary';
@@ -70,6 +71,7 @@ const componentStyles = computed(() => {
             case ButtonType.Success :
                 styles += ' theme-action-success';
                 break;
+        }
     }
 
     if (actualLayout.value === ButtonLayout.Rectangle)

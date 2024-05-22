@@ -16,7 +16,7 @@
     }
 
     .theme-action-disabled {
-        @apply bg-accentSecondaryColorDark;
+        @apply bg-secondaryContentColor dark:bg-accentSecondaryColorDark;
     }
 
     .theme-action-primary {
