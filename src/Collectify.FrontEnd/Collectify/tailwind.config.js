@@ -22,7 +22,7 @@ export default {
         secondaryContentColor: '#b2b0ad',
         secondaryAlternativeContentColor: '#777777',
         accentPrimaryColor: '#FCE181',
-        accentSecondaryColor: '#9FEDD7',
+        accentSecondaryColor: '#b2b0ad',
         accentTertiaryColor: '#03A9F4',
         primaryBorderColor: '#026670',
         secondaryBorderColor: '#FEF9C7',
