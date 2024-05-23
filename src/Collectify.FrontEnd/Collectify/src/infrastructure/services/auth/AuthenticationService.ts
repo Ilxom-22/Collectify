@@ -41,6 +41,17 @@ export class AuthenticationService {
             return signUpResponse.error;
     }
 
+    public async logOutAsync() {
+        const logOutResponse = await this.collectifyApiClient.auth.logOutAsync();
+
+        if (!logOutResponse.isSuccess) {
+            return logOutResponse.error;
+        }
+        else {
+            this.accountStore.remove();
+        }
+    }
+
     public async setCurrentUser() {
         if (!this.hasAccessToken()) return;
 
