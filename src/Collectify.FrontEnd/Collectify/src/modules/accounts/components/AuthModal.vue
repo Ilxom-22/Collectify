@@ -38,6 +38,8 @@ import { SignInDetails } from '../models/SignInDetails';
 import { AuthenticationService } from '@/infrastructure/services/auth/AuthenticationService';
 import { MessageType } from '@/common/components/messageBox/MessageType';
 import MessageBox from '@/common/components/messageBox/MessageBox.vue'
+import { ProblemDetails } from '@/infrastructure/apiClients/ProblemDetails';
+import { MessageConstants } from '@/common/constants/MessageConstants';
 
 const props = defineProps({
     isModalActive: {
@@ -81,7 +83,7 @@ const signUpAsync = async () => {
     const response = await authenticationService.signUpAsync(signUpDetails.value);
     
     if (response) {
-        messageBox.value.showMessage(response.detail, MessageType.Error);
+        displayErrorMessage(response);
     }
     else {
         await signInAsync();
@@ -95,7 +97,7 @@ const signInAsync = async () => {
     const response = await authenticationService.signInAsync(signInDetails.value);
 
     if (response) {
-        messageBox.value.showMessage(response.detail, MessageType.Error);
+        displayErrorMessage(response);
     }
     else {
         var result = await authenticationService.setCurrentUser();
@@ -107,6 +109,15 @@ const signInAsync = async () => {
 const clearInputs = () => {
     signUpDetails.value = new SignUpDetails();
     signInDetails.value = new SignInDetails();
+}
+
+const displayErrorMessage = (error: ProblemDetails) => {
+    if (error.isUserFriendly) {
+        messageBox.value.showMessage(error.detail, MessageType.Error);
+    }
+    else {
+        messageBox.value.showMessage(MessageConstants.DefaultErrorMessage, MessageType.Error);
+    }
 }
 
 </script>
