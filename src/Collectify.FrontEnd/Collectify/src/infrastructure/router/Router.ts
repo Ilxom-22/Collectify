@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import { AuthenticationService } from '../services/auth/AuthenticationService';
+import { useAccountStore } from '../stores/AccountStore';
 
 const routes = [
     {
@@ -24,6 +25,9 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => { 
     const authService = new AuthenticationService();
     await authService.setCurrentUser();
+
+    const accountStore = useAccountStore();
+    const authenticated = accountStore.account.isLoggedIn();
 
     next();
 });
