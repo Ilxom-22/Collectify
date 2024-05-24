@@ -18,4 +18,8 @@
     .theme-bg {
         @apply bg-primaryColor dark:bg-primaryColorDark;
     }
+
+    .theme-border {
+        @apply border-[0.5px] border-accentSecondaryColor dark:border-accentSecondaryColorDark
+    }
 }

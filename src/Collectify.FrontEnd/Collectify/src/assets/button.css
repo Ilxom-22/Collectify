@@ -28,7 +28,7 @@
     }
 
     .theme-action-danger {
-        @apply bg-dangerColor;
+        @apply text-white bg-dangerColor;
     }
 
     .theme-action-success {
