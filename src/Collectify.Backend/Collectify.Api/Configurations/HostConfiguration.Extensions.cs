@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text;
+using Collectify.Api.Data;
 using Collectify.Api.Filters;
 using Collectify.Application.Identity.Brokers;
 using Collectify.Application.Identity.Models.Dtos;
@@ -113,7 +114,8 @@ public static partial class HostConfiguration
         builder.Services
             .AddScoped<IUserService, UserService>()
             .AddScoped<IAccessTokenService, AccessTokenService>()
-            .AddScoped<IAuthService, AuthService>();
+            .AddScoped<IAuthService, AuthService>()
+            .AddScoped<IAccountService, AccountService>();
         
         return builder;
     }
@@ -147,6 +149,14 @@ public static partial class HostConfiguration
         var serviceScopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
         await serviceScopeFactory.MigrateAsync<AppDbContext>();
         
+        return app;
+    }
+
+    private static async ValueTask<WebApplication> SeedDataAsync(this WebApplication app)
+    {
+        var serviceScope = app.Services.CreateScope();
+        await serviceScope.ServiceProvider.InitializeAsync();
+
         return app;
     }
     

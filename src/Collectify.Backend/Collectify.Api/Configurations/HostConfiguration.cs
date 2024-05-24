@@ -25,6 +25,7 @@ public static partial class HostConfiguration
             .UseExposers();
 
         await app.MigrateDatabaseSchemaAsync();
+        await app.SeedDataAsync();
         
         return app;
     }
