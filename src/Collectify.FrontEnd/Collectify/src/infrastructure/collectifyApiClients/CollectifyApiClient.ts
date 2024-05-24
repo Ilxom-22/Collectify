@@ -1,4 +1,5 @@
 import ApiClientBase from "../apiClients/ApiClientBase";
+import { AccountsEndpointsClient } from "./endpointsClients/AccountsEndpointsClient";
 import { AuthEndpointsClient } from "./endpointsClients/AuthEndpointsClient";
 
 export class CollectifyApiClient {
@@ -15,7 +16,9 @@ export class CollectifyApiClient {
         });
 
         this.auth = new AuthEndpointsClient(this.client);
+        this.accounts = new AccountsEndpointsClient(this.client);
     }
 
     public readonly auth: AuthEndpointsClient;
+    public readonly accounts: AccountsEndpointsClient;
 }
