@@ -10,7 +10,7 @@ public class UserDto
 
     public string EmailAddress { get; init; } = default!;
 
-    public Role Role { get; set; }
+    public string Role { get; set; }
 
-    public AccountStatus Status { get; init; }
+    public string Status { get; init; }
 }

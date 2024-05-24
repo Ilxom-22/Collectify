@@ -1,4 +1,4 @@
 export enum AccountStatus {
-    Active,
-    Blocked
+    Active = 'Active',
+    Blocked = 'Blocked'
 }
